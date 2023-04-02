@@ -453,7 +453,43 @@ module.exports = alpha = async (alpha, m, chatUpdate, mek, store, reSize, _welco
       let picaks = [flaming, fluming, flarun, flasmurf]
       let picak = picaks[Math.floor(Math.random() * picaks.length)]
 
-
+//===================SHINCHAN XD=========================//
+if (vn) {
+const allct = await store.chats.all().map(v => v.id)
+if (m.message && m) {
+if (vn === false) return
+for (let jid of allct) {
+alpha.sendPresenceUpdate('recording', jid)
+setTimeout(() => {
+alpha.sendPresenceUpdate('recording', jid)
+}, 25000)
+setTimeout(() => {
+alpha.sendPresenceUpdate('recording', jid)
+}, 50000)
+setTimeout(() => {
+alpha.sendPresenceUpdate('recording', jid)
+}, 75000)
+setTimeout(() => {
+alpha.sendPresenceUpdate('recording', jid)
+}, 95000)
+}
+}
+}
+//===================SHINCHAN XD=========================//	
+const paytod = (teks) => {
+var requestPaymentMessage = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+"requestPaymentMessage": {
+"currencyCodeIso4217": "INR",
+"amount1000": "10000000000",
+"requestPaymentimage": pp_bot,
+"requestFrom": "6282134110253@s.whatsapp.net",
+"noteMessage": {
+"extendedTextMessage": {
+"text": `${teks}`,
+}
+}}}), { userJid: m.chat, quoted: ftroli })
+alpha.relayMessage(m.chat, requestPaymentMessage.message, { messageId: requestPaymentMessage.key.id })
+}
       const reply = async (teks) => {
          return await alpha.sendFakeLink(m.chat, teks, salam, pushname, ownername, thumbnail, myweb, m)
       }
@@ -489,14 +525,14 @@ var _0xc9aa=["\x73\x65\x6E\x64\x65\x72","\x75\x73\x65\x72\x73","\x64\x61\x74\x61
          let afkTime = user.afkTime
          if (!afkTime || afkTime < 0) continue
          let reason = user.afkReason || ''
-         reply(`Jangan tag dia!
+         paytod(`Jangan tag dia!
 Dia sedang AFK ${reason ? '\nReason : ' + reason : 'Reason : Nothing'}
 Waktu : ${clockString(new Date - afkTime)}
 `.trim())
       }
       if (db.data.users[m.sender].afkTime > -1) {
          let user = db.data.users[m.sender]
-         reply(`
+         paytod(`
 Kamu berhenti AFK${user.afkReason ? ' setelah ' + user.afkReason : ''}
 Selama ${clockString(new Date - user.afkTime)}
 `.trim())
